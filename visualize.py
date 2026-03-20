@@ -73,7 +73,7 @@ def plot_single_method(results: dict, title: str, save_path: Optional[str] = Non
     ax.set_yticklabels(layer_labels, fontsize=8, color="white")
     ax.set_xticks(range(seq_len))
     ax.set_xticklabels(tokens, fontsize=7, rotation=45, ha="right", color="white")
-    ax.set_title(f"{title} – Top-token Probability", fontsize=11, color="white", pad=10)
+    ax.set_title(f"{title} - Top-token Probability", fontsize=11, color="white", pad=10)
     ax.set_facecolor("#0e1117")
     ax.tick_params(colors="white")
 
@@ -82,14 +82,14 @@ def plot_single_method(results: dict, title: str, save_path: Optional[str] = Non
         for p in range(seq_len):
             tok_str = _sanitize(results["top_strings"][layer][p])[:6]
             prob_val = top_probs_np[layer, p]
-            colour = "black" if prob_val > 0.5 else "white"
+            colour = "black" if prob_val > 0.5 else "grey"
             ax.text(
                 p,
                 layer,
                 tok_str,
                 ha="center",
                 va="center",
-                fontsize=5,
+                fontsize=12,
                 color=colour,
                 fontweight="bold",
             )
@@ -104,7 +104,7 @@ def plot_single_method(results: dict, title: str, save_path: Optional[str] = Non
     ax2.set_yticklabels(layer_labels, fontsize=8, color="white")
     ax2.set_xticks(range(seq_len))
     ax2.set_xticklabels(tokens, fontsize=7, rotation=45, ha="right", color="white")
-    ax2.set_title(f"{title} – Entropy (nats)", fontsize=11, color="white", pad=10)
+    ax2.set_title(f"{title} - Entropy (nats)", fontsize=11, color="white", pad=10)
     ax2.set_facecolor("#0e1117")
     ax2.tick_params(colors="white")
 
@@ -131,9 +131,9 @@ def plot_comparison(
 ):
     """
     Three-row figure:
-      row 1 – Logit Lens top-prob
-      row 2 – Tuned Lens top-prob
-      row 3 – Δ probability (tuned − logit)
+      row 1 - Logit Lens top-prob
+      row 2 - Tuned Lens top-prob
+      row 3 - Δ probability (tuned − logit)
     """
     tokens = [_sanitize(t) for t in logit_results["tokens"]]
     n_layers_plus_1 = logit_results["top_probs"].shape[0]
@@ -155,8 +155,8 @@ def plot_comparison(
 
     for idx, (data, cmap, vmin, vmax, label) in enumerate(
         [
-            (logit_probs, _PROB_CMAP, 0, 1, "Logit Lens – Top-token Prob"),
-            (tuned_probs, _PROB_CMAP, 0, 1, "Tuned Lens – Top-token Prob"),
+            (logit_probs, _PROB_CMAP, 0, 1, "Logit Lens - Top-token Prob"),
+            (tuned_probs, _PROB_CMAP, 0, 1, "Tuned Lens - Top-token Prob"),
             (diff, _DIFF_CMAP, -0.5, 0.5, "Δ Probability (Tuned − Logit)"),
         ]
     ):
@@ -178,14 +178,14 @@ def plot_comparison(
                 for p in range(seq_len):
                     tok_str = _sanitize(src["top_strings"][layer][p])[:6]
                     prob_val = probs_arr[layer, p]
-                    colour = "black" if prob_val > 0.5 else "white"
+                    colour = "black" if prob_val > 0.5 else "gray"
                     ax.text(
                         p,
                         layer,
                         tok_str,
                         ha="center",
                         va="center",
-                        fontsize=5,
+                        fontsize=12,
                         color=colour,
                         fontweight="bold",
                     )
